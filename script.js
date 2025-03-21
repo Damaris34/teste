@@ -2,10 +2,10 @@ let registros = [];
 
 function adicionarRegistro() {
     const data = document.getElementById('data').value;
-    const quantidade = document.getElementById('quantidade').value;
+    const consumo = document.getElementById('consumo').value;
 
-    if (data && quantidade) {
-        registros.push({ data, quantidade });
+    if (data && consumo) {
+        registros.push({ data, consumo });
         atualizarTabela();
         limparFormulario();
     }
@@ -17,7 +17,7 @@ function atualizarTabela() {
     registros.forEach((registro, index) => {
         const row = `<tr>
             <td>${registro.data}</td>
-            <td>${registro.quantidade}</td>
+            <td>${registro.consumo}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
@@ -25,16 +25,16 @@ function atualizarTabela() {
 
 function limparFormulario() {
     document.getElementById('data').value = '';
-    document.getElementById('quantidade').value = '';
+    document.getElementById('consumo').value = '';
 }
 
 function exportarParaExcel() {
     const csvRows = [];
-    const headers = ['Data', 'Quantidade'];
+    const headers = ['Data', 'Consumo Diário'];
     csvRows.push(headers.join(','));
 
     registros.forEach(registro => {
-        const row = [registro.data, registro.quantidade];
+        const row = [registro.data, registro.consumo];
         csvRows.push(row.join(','));
     });
 
