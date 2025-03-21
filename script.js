@@ -8,6 +8,7 @@ function adicionarRegistro() {
     if (data && nomeColaborador && !isNaN(consumo)) {
         registros.push({ data, nomeColaborador, consumo });
         atualizarTabela();
+        atualizarGrafico();
         limparFormulario();
     } else {
         alert("Por favor, preencha todos os campos corretamente.");
@@ -26,6 +27,37 @@ function atualizarTabela() {
             <td>${variacaoDiaria.toFixed(2)}</td>
         </tr>`;
         tbody.innerHTML += row;
+    });
+}
+
+function atualizarGrafico() {
+    const ctx = document.getElementById('consumoChart').getContext('2d');
+
+    const labels = registros.map(registro => registro.data);
+    const data = registros.map(registro => registro.consumo);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Consumo Diário (kWh)',
+                data: data,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
+                }
+            }
+        }
     });
 }
 
