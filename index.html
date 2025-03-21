@@ -11,15 +11,15 @@
         <h1>Registro de Consumo Diário</h1>
         <form id="consumoForm">
             <div class="form-group">
-                <label for="data">Data de Registro:</label>
+                <label for="data">Data:</label>
                 <input type="date" id="data" name="data" required>
             </div>
             <div class="form-group">
-                <label for="nomeColaborador">Nome do Colaborador:</label>
+                <label for="nomeColaborador">Colaborador:</label>
                 <input type="text" id="nomeColaborador" name="nomeColaborador" required>
             </div>
             <div class="form-group">
-                <label for="consumo">Consumo Diário:</label>
+                <label for="consumo">Consumo (kWh):</label>
                 <input type="number" id="consumo" name="consumo" required>
             </div>
             <button type="button" onclick="adicionarRegistro()" class="btn">Adicionar Registro</button>
@@ -28,9 +28,9 @@
             <thead>
                 <tr>
                     <th>Data</th>
-                    <th>Nome do Colaborador</th>
-                    <th>Consumo Diário</th>
-                    <th>Resultado do Consumo</th>
+                    <th>Colaborador</th>
+                    <th>Consumo (kWh)</th>
+                    <th>Variação Diária (kWh)</th>
                 </tr>
             </thead>
             <tbody>
