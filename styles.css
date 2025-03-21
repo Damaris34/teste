@@ -58,6 +58,13 @@ input {
     background-color: #0056b3;
 }
 
+.chart-container {
+    margin-top: 20px;
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
