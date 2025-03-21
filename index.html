@@ -12,8 +12,12 @@
         <form id="consumoForm">
             <label for="data">Data de Registro:</label>
             <input type="date" id="data" name="data" required>
+            <label for="nomeColaborador">Nome do Colaborador:</label>
+            <input type="text" id="nomeColaborador" name="nomeColaborador" required>
             <label for="consumo">Consumo Diário:</label>
             <input type="number" id="consumo" name="consumo" required>
+            <label for="responsavel">Responsável pela Coleta:</label>
+            <input type="text" id="responsavel" name="responsavel" required>
             <button type="button" onclick="adicionarRegistro()">Adicionar Registro</button>
         </form>
         <table id="registrosTable">
@@ -22,6 +26,7 @@
                     <th>Data</th>
                     <th>Nome do Colaborador</th>
                     <th>Consumo Diário</th>
+                    <th>Responsável pela Coleta</th>
                     <th>Resultado do Consumo</th>
                 </tr>
             </thead>
