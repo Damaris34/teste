@@ -1,91 +1,92 @@
-let registros = [];
-
-function adicionarRegistro() {
-    const data = document.getElementById('data').value;
-    const nomeColaborador = document.getElementById('nomeColaborador').value;
-    const consumo = parseFloat(document.getElementById('consumo').value);
-
-    if (data && nomeColaborador && !isNaN(consumo)) {
-        registros.push({ data, nomeColaborador, consumo });
-        atualizarTabela();
-        atualizarGrafico();
-        limparFormulario();
-    } else {
-        alert("Por favor, preencha todos os campos corretamente.");
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-function atualizarTabela() {
-    const tbody = document.querySelector('#registrosTable tbody');
-    tbody.innerHTML = '';
-    registros.forEach((registro, index) => {
-        const variacaoDiaria = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
-        const row = `<tr>
-            <td>${registro.data}</td>
-            <td>${registro.nomeColaborador}</td>
-            <td>${registro.consumo.toFixed(2)}</td>
-            <td>${variacaoDiaria.toFixed(2)}</td>
-        </tr>`;
-        tbody.innerHTML += row;
-    });
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
 }
 
-function atualizarGrafico() {
-    const ctx = document.getElementById('consumoChart').getContext('2d');
-
-    const labels = registros.map(registro => registro.data);
-    const data = registros.map(registro => registro.consumo);
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Consumo Diário (kWh)',
-                data: data,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    type: 'time',
-                    time: {
-                        unit: 'day'
-                    }
-                }
-            }
-        }
-    });
+h1 {
+    color: #333;
+    margin-bottom: 20px;
 }
 
-function limparFormulario() {
-    document.getElementById('data').value = '';
-    document.getElementById('nomeColaborador').value = '';
-    document.getElementById('consumo').value = '';
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
 }
 
-function exportarParaExcel() {
-    const csvRows = [];
-    const headers = ['Data', 'Colaborador', 'Consumo (kWh)', 'Variação Diária (kWh)'];
-    csvRows.push(headers.join(','));
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
-    registros.forEach((registro, index) => {
-        const variacaoDiaria = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
-        const row = [registro.data, registro.nomeColaborador, registro.consumo, variacaoDiaria];
-        csvRows.push(row.join(','));
-    });
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
 
-    const csvString = csvRows.join('\n');
-    const blob = new Blob([csvString], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.setAttribute('hidden', '');
-    a.setAttribute('href', url);
-    a.setAttribute('download', 'registros.csv');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+.btn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.chart-container {
+    margin-top: 20px;
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e2e2e2;
 }
