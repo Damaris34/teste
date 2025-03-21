@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Consumo Diário</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Consumo Diário</h1>
+        <form id="consumoForm">
+            <label for="data">Data de Registro:</label>
+            <input type="date" id="data" name="data" required>
+            <label for="quantidade">Quantidade de Consumo:</label>
+            <input type="number" id="quantidade" name="quantidade" required>
+            <button type="button" onclick="adicionarRegistro()">Adicionar Registro</button>
+        </form>
+        <table id="registrosTable">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Registros serão adicionados aqui -->
+            </tbody>
+        </table>
+        <button onclick="exportarParaExcel()">Exportar para Excel</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
