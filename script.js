@@ -18,12 +18,12 @@ function atualizarTabela() {
     const tbody = document.querySelector('#registrosTable tbody');
     tbody.innerHTML = '';
     registros.forEach((registro, index) => {
-        const resultadoConsumo = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
+        const variacaoDiaria = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
         const row = `<tr>
             <td>${registro.data}</td>
             <td>${registro.nomeColaborador}</td>
             <td>${registro.consumo.toFixed(2)}</td>
-            <td>${resultadoConsumo.toFixed(2)}</td>
+            <td>${variacaoDiaria.toFixed(2)}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
@@ -37,12 +37,12 @@ function limparFormulario() {
 
 function exportarParaExcel() {
     const csvRows = [];
-    const headers = ['Data', 'Nome do Colaborador', 'Consumo Diário', 'Resultado do Consumo'];
+    const headers = ['Data', 'Colaborador', 'Consumo (kWh)', 'Variação Diária (kWh)'];
     csvRows.push(headers.join(','));
 
     registros.forEach((registro, index) => {
-        const resultadoConsumo = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
-        const row = [registro.data, registro.nomeColaborador, registro.consumo, resultadoConsumo];
+        const variacaoDiaria = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
+        const row = [registro.data, registro.nomeColaborador, registro.consumo, variacaoDiaria];
         csvRows.push(row.join(','));
     });
 
