@@ -3,13 +3,15 @@ let registros = [];
 function adicionarRegistro() {
     const data = document.getElementById('data').value;
     const nomeColaborador = document.getElementById('nomeColaborador').value;
-    const consumo = document.getElementById('consumo').value;
+    const consumo = parseFloat(document.getElementById('consumo').value);
     const responsavel = document.getElementById('responsavel').value;
 
-    if (data && nomeColaborador && consumo && responsavel) {
+    if (data && nomeColaborador && !isNaN(consumo) && responsavel) {
         registros.push({ data, nomeColaborador, consumo, responsavel });
         atualizarTabela();
         limparFormulario();
+    } else {
+        alert("Por favor, preencha todos os campos corretamente.");
     }
 }
 
@@ -21,9 +23,9 @@ function atualizarTabela() {
         const row = `<tr>
             <td>${registro.data}</td>
             <td>${registro.nomeColaborador}</td>
-            <td>${registro.consumo}</td>
+            <td>${registro.consumo.toFixed(2)}</td>
             <td>${registro.responsavel}</td>
-            <td>${resultadoConsumo}</td>
+            <td>${resultadoConsumo.toFixed(2)}</td>
         </tr>`;
         tbody.innerHTML += row;
     });
