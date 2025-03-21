@@ -2,11 +2,12 @@ let registros = [];
 
 function adicionarRegistro() {
     const data = document.getElementById('data').value;
+    const nomeColaborador = document.getElementById('nomeColaborador').value;
     const consumo = document.getElementById('consumo').value;
-    const nomeColaborador = "Damaris"; // Pode ser dinâmico se necessário
+    const responsavel = document.getElementById('responsavel').value;
 
-    if (data && consumo) {
-        registros.push({ data, nomeColaborador, consumo });
+    if (data && nomeColaborador && consumo && responsavel) {
+        registros.push({ data, nomeColaborador, consumo, responsavel });
         atualizarTabela();
         limparFormulario();
     }
@@ -21,6 +22,7 @@ function atualizarTabela() {
             <td>${registro.data}</td>
             <td>${registro.nomeColaborador}</td>
             <td>${registro.consumo}</td>
+            <td>${registro.responsavel}</td>
             <td>${resultadoConsumo}</td>
         </tr>`;
         tbody.innerHTML += row;
@@ -29,17 +31,19 @@ function atualizarTabela() {
 
 function limparFormulario() {
     document.getElementById('data').value = '';
+    document.getElementById('nomeColaborador').value = '';
     document.getElementById('consumo').value = '';
+    document.getElementById('responsavel').value = '';
 }
 
 function exportarParaExcel() {
     const csvRows = [];
-    const headers = ['Data', 'Nome do Colaborador', 'Consumo Diário', 'Resultado do Consumo'];
+    const headers = ['Data', 'Nome do Colaborador', 'Consumo Diário', 'Responsável pela Coleta', 'Resultado do Consumo'];
     csvRows.push(headers.join(','));
 
     registros.forEach((registro, index) => {
         const resultadoConsumo = index > 0 ? registro.consumo - registros[index - 1].consumo : 0;
-        const row = [registro.data, registro.nomeColaborador, registro.consumo, resultadoConsumo];
+        const row = [registro.data, registro.nomeColaborador, registro.consumo, registro.responsavel, resultadoConsumo];
         csvRows.push(row.join(','));
     });
 
